@@ -2,7 +2,7 @@ from card import Card
 import random
 
 class Deck:
-    def __init__(self):
+    def __init__(self) -> None:
         self.cards = [Card(v,s) for v in range(1,14) for s in ['Hearts','Spades','Diamonds','Clubs']]
 
     def shuffle(self) -> None:
