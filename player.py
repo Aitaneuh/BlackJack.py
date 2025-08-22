@@ -6,7 +6,9 @@ class Player:
         self.hand = []
 
     def play(self, dealer_card: Card) -> str:
-        # TODO strat algo
+        dealer_hand_value = dealer_card.value
+        hand_value = self.get_hand_value()
+        # TODO
         return 'stand'
     
     def add_card(self, card: Card) -> None:
