@@ -10,7 +10,7 @@ class Game:
         self.deck.shuffle()
 
     def has_blackjack(self, player: Player) -> bool:
-        if player.get_hand_value() == 21:
+        if player.get_hand_value(player.hand) == 21:
             return True
         return False
 
@@ -41,7 +41,7 @@ class Game:
                 player_hit_count += 1
                 self.player.add_card(self.deck.draw())
 
-            if self.player.get_hand_value() > 21:
+            if self.player.get_hand_value(self.player.hand) > 21:
                 return {"Outcome":"bust", "player_score":self.player.get_hand_value, "dealer_score":self.dealer.get_hand_value, "player_hit_count":player_hit_count, "dealer_hit_count":0, "score":-1}
 
         dealer_hit_count = 0
@@ -52,11 +52,11 @@ class Game:
                 dealer_hit_count += 1
                 self.dealer.add_card(self.deck.draw())
             
-            if self.dealer.get_hand_value() > 21:
+            if self.dealer.get_hand_value(self.dealer.hand) > 21:
                 return {"Outcome":"dealer_bust", "player_score":self.player.get_hand_value, "dealer_score":self.dealer.get_hand_value, "player_hit_count":player_hit_count, "dealer_hit_count":dealer_hit_count, "score":1}
             
-        player_hand_value = self.player.get_hand_value()
-        dealer_hand_value = self.dealer.get_hand_value()
+        player_hand_value = self.player.get_hand_value(self.player.hand)
+        dealer_hand_value = self.dealer.get_hand_value(self.dealer.hand)
 
         if player_hand_value > dealer_hand_value:
             return {"Outcome":"win", "player_score":player_hand_value, "dealer_score":dealer_hand_value, "player_hit_count":player_hit_count, "dealer_hit_count":dealer_hit_count, "score":1}
