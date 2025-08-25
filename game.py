@@ -31,7 +31,7 @@ class Game:
         elif player_blackjack and dealer_blackjack:
             return {"Outcome":"draw", "player_score":21, "dealer_score":21, "player_hit_count":0, "dealer_hit_count":0}
         elif not player_blackjack and dealer_blackjack:
-            return {"Outcome":"dealer_blackjack", "player_score":self.player.get_hand_value, "dealer_score":21, "player_hit_count":0, "dealer_hit_count":0, "score":-1}
+            return {"Outcome":"dealer_blackjack", "player_score":self.player.get_hand_value(self.player.hand), "dealer_score":21, "player_hit_count":0, "dealer_hit_count":0, "score":-1}
 
         player_hit_count = 0
         while True:
@@ -42,7 +42,7 @@ class Game:
                 self.player.add_card(self.deck.draw())
 
             if self.player.get_hand_value(self.player.hand) > 21:
-                return {"Outcome":"bust", "player_score":self.player.get_hand_value, "dealer_score":self.dealer.get_hand_value, "player_hit_count":player_hit_count, "dealer_hit_count":0, "score":-1}
+                return {"Outcome":"bust", "player_score":self.player.get_hand_value(self.player.hand), "dealer_score":self.dealer.get_hand_value(self.dealer.hand), "player_hit_count":player_hit_count, "dealer_hit_count":0, "score":-1}
 
         dealer_hit_count = 0
         while True:
@@ -53,7 +53,7 @@ class Game:
                 self.dealer.add_card(self.deck.draw())
             
             if self.dealer.get_hand_value(self.dealer.hand) > 21:
-                return {"Outcome":"dealer_bust", "player_score":self.player.get_hand_value, "dealer_score":self.dealer.get_hand_value, "player_hit_count":player_hit_count, "dealer_hit_count":dealer_hit_count, "score":1}
+                return {"Outcome":"dealer_bust", "player_score":self.player.get_hand_value(self.player.hand), "dealer_score":self.dealer.get_hand_value(self.dealer.hand), "player_hit_count":player_hit_count, "dealer_hit_count":dealer_hit_count, "score":1}
             
         player_hand_value = self.player.get_hand_value(self.player.hand)
         dealer_hand_value = self.dealer.get_hand_value(self.dealer.hand)
